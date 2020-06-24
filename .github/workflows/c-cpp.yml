@@ -17,6 +17,8 @@ jobs:
       run: sudo sed -i 's/azure\.//' /etc/apt/sources.list && sudo apt-get update
     - name: install dependencies
       run: sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-mixer-dev liblua5.3-dev libglm-dev --fix-missing
+    - name: update PKG_CONFIG_PATH
+      run: export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig/
     - name: build debug
       run: make debug
     - name: clean
