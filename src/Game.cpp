@@ -1,11 +1,13 @@
+#include <glm/glm.hpp>
+
+#include "Constants.h"
 #include "Logger.h"
 #include "Game.h"
 
 Logger logger;
-float projectilePosX = 0.0f;
-float projectilePosY = 0.0f;
-float projectileVelX = 20.0f;
-float projectileVelY = 20.0f;
+
+glm::vec2 projectilePos = glm::vec2(0.0f, 0.0f);
+glm::vec2 projectileVel = glm::vec2(20.0f, 20.0f);
 
 Game::Game()
     : m_running(false) {}
@@ -71,7 +73,7 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-    // Wait until target time has ellapsed since the last frame
+    // Wait until frame target time has ellapsed
     unsigned int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - m_ticksLastFrame);
     if (timeToWait > 0 && timeToWait < FRAME_TARGET_TIME)
         SDL_Delay(timeToWait);
@@ -85,8 +87,7 @@ void Game::Update()
     // Set the new ticks for the current frame to be used in the next pass
     m_ticksLastFrame = SDL_GetTicks();
 
-    projectilePosX += projectileVelX * deltaTime;
-    projectilePosY += projectileVelY * deltaTime;
+    projectilePos = glm::vec2(projectilePos.x + projectileVel.x * deltaTime, projectilePos.y + projectileVel.y * deltaTime);
 }
 
 void Game::Render()
@@ -95,8 +96,8 @@ void Game::Render()
     SDL_RenderClear(m_renderer);
     SDL_SetRenderDrawColor(m_renderer, 239, 239, 239, 255);
     SDL_Rect projectile{
-        (int)projectilePosX,
-        (int)projectilePosY,
+        (int)projectilePos.x,
+        (int)projectilePos.y,
         10,
         10};
     SDL_RenderFillRect(m_renderer, &projectile);
