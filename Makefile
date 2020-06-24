@@ -38,15 +38,15 @@ endif
 
 # Linux special flags for SDL
 ifeq ($(UNAME_S),)
-	COMPILE_FLAGS += $(shell sdl2-config --cflags)
-	LINK_FLAGS += $(shell sdl2-config --libs)
+	SDL_C_FLAGS = $(shell sdl2-config --cflags)
+	SDL_L_FLAGS = $(shell sdl2-config --libs)
 endif
 
 # Combine compiler and linker flags
-release: export CXXFLAGS := $(CXXFLAGS) $(COMPILE_FLAGS) $(RCOMPILE_FLAGS)
-release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(RLINK_FLAGS)
-debug: export CXXFLAGS := $(CXXFLAGS) $(COMPILE_FLAGS) $(DCOMPILE_FLAGS)
-debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(DLINK_FLAGS)
+release: export CXXFLAGS := $(CXXFLAGS) $(COMPILE_FLAGS) $(RCOMPILE_FLAGS) $(SDL_C_FLAGS)
+release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(RLINK_FLAGS) $(SDL_L_FLAGS)
+debug: export CXXFLAGS := $(CXXFLAGS) $(COMPILE_FLAGS) $(DCOMPILE_FLAGS) $(SDL_C_FLAGS)
+debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(DLINK_FLAGS) $(SDL_L_FLAGS)
 
 # Build and output paths
 release: export BUILD_PATH := build/release
@@ -192,6 +192,7 @@ all: $(BIN_PATH)/$(BIN_NAME)
 # Link the executable
 $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 	@echo "Linking: $@"
+	@echo $(LDFLAGS)
 	@$(START_TIME)
 	$(CMD_PREFIX)$(CXX) $(OBJECTS) $(LDFLAGS) -o $@
 	@echo -en "\t Link time: "
