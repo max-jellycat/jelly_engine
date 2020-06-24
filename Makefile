@@ -9,6 +9,7 @@ else ifeq ($(UNAME_S), Linux)
 	CXX := g++
 else
 	CXX := mingw32-g++
+endif
 
 # make print-VARNAME
 print-%: ; @echo $*=$($*)
