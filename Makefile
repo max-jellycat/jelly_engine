@@ -35,8 +35,8 @@ debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(DLINK_FLAGS)
 
 # Linux special flags for SDL
 ifeq ($(UNAME_S))
-	COMPILE_FLAGS := $(shell sdl2-config --cflags)
-	LDFLAGS := $(shell sdl2-config --libs)
+	COMPILE_FLAGS += $(shell sdl2-config --cflags)
+	LDFLAGS += $(shell sdl2-config --libs)
 endif
 
 # Build and output paths
