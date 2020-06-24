@@ -16,7 +16,7 @@ jobs:
     - name: workaround ubuntu security failures
       run: sudo sed -i 's/azure\.//' /etc/apt/sources.list && sudo apt-get update
     - name: install dependencies
-      run: sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-mixer-dev lua5.3 libglm-dev --fix-missing
+      run: sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-mixer-dev liblua5.3-dev libglm-dev --fix-missing
     - name: build debug
       run: make debug
     - name: clean
