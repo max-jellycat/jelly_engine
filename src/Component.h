@@ -1,13 +1,14 @@
 #pragma once
 
-#include "../entities/Entity.h"
+#include "Entity.h"
+
+class Entity;
 
 class Component
 {
 public:
     Entity *owner;
 
-public:
     virtual ~Component();
     virtual void Init();
     virtual void Update(float deltaTime);

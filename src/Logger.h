@@ -11,7 +11,7 @@ public:
     };
 
 private:
-    Level m_logLevel;
+    Level logLevel;
 
 public:
     Logger();

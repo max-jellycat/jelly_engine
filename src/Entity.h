@@ -1,23 +1,27 @@
 #pragma once
+
 #include <vector>
 #include <string>
-#include "../EntityManager.h"
-#include "../components/Component.h"
+#include "EntityManager.h"
+#include "Component.h"
+
+class Component;
+class EntityManager;
 
 class Entity
 {
 private:
-    std::string m_name;
-    EntityManager &m_manager;
-    bool m_active;
-    std::vector<Component *> m_components;
+    EntityManager &manager;
+    bool active;
+    std::vector<Component *> components;
 
 public:
+    std::string name;
+
     Entity(EntityManager &manager);
     Entity(EntityManager &manager, std::string name);
     void Update(float deltaTime);
     void Render();
     void Destroy();
-    void GetName() const;
     bool Active() const;
 };
