@@ -1,12 +1,11 @@
-#include <iostream>
 #include "Logger.h"
 #include "Game.h"
 
 Logger logger;
 float projectilePosX = 0.0f;
 float projectilePosY = 0.0f;
-float projectileVelX = 1.0f;
-float projectileVelY = 1.0f;
+float projectileVelX = 20.0f;
+float projectileVelY = 20.0f;
 
 Game::Game()
     : m_running(false) {}
@@ -72,8 +71,22 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-    projectilePosX += projectileVelX;
-    projectilePosY += projectileVelY;
+    // Wait until target time has ellapsed since the last frame
+    unsigned int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - m_ticksLastFrame);
+    if (timeToWait > 0 && timeToWait < FRAME_TARGET_TIME)
+        SDL_Delay(timeToWait);
+
+    // Delta time is the difference in ticks form last frame converted to seconds
+    float deltaTime = (SDL_GetTicks() - m_ticksLastFrame) / 1000.0f;
+
+    // Clamp deltaTime to a maximum value
+    deltaTime = (deltaTime > 0.05f) ? 0.05f : deltaTime;
+
+    // Set the new ticks for the current frame to be used in the next pass
+    m_ticksLastFrame = SDL_GetTicks();
+
+    projectilePosX += projectileVelX * deltaTime;
+    projectilePosY += projectileVelY * deltaTime;
 }
 
 void Game::Render()
