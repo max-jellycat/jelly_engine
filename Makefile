@@ -33,6 +33,12 @@ release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(RLINK_FLAGS)
 debug: export CXXFLAGS := $(CXXFLAGS) $(COMPILE_FLAGS) $(DCOMPILE_FLAGS)
 debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(DLINK_FLAGS)
 
+# Linux special flags for SDL
+ifeq ($(UNAME_S))
+	COMPILE_FLAGS := $(shell sdl2-config --cflags)
+	LDFLAGS := $(shell sdl2-config --libs)
+endif
+
 # Build and output paths
 release: export BUILD_PATH := build/release
 release: export BIN_PATH := bin/release
