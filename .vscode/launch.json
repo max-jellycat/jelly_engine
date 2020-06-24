@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "configurations": [
+      {
+        "name": "C++ Replay",
+        "type": "lldb",
+        "request": "custom",
+        "reverseDebugging": true
+      },
+        {
+            "name": "C++ Launch",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/debug/jelly_engine",
+            "preLaunchTask": "build",
+            "internalConsoleOptions": "openOnSessionStart",
+            "relativePathBase": "${workspaceRoot}/src",
+            "reverseDebugging": true,
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "osx": {
+                "MIMode": "lldb"
+            }
+        }
+    ]
+}
