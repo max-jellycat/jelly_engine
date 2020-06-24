@@ -20,17 +20,17 @@ ifneq ($(LIBS),)
 	LINK_FLAGS += $(shell pkg-config --libs $(LIBS))
 endif
 
-# Linux special flags for SDL
-ifeq ($(UNAME_S))
-	COMPILE_FLAGS += $(shell sdl2-config --cflags)
-	LINK_FLAGS += $(shell sdl2-config --libs)
-endif
-
 # Verbose option, to output compile and link commands
 export V := false
 export CMD_PREFIX := @
 ifeq ($(V),true)
 	CMD_PREFIX :=
+endif
+
+# Linux special flags for SDL
+ifeq ($(UNAME_S),)
+	COMPILE_FLAGS += $(shell sdl2-config --cflags)
+	LINK_FLAGS += $(shell sdl2-config --libs)
 endif
 
 # Combine compiler and linker flags
