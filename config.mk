@@ -12,7 +12,7 @@ INCLUDE_PATH = ./include
 # Path to the external libraries, relative to the makefile
 LIBS_PATH = ./lib
 # Space-separated pkg-config libraries used by this project
-LIBS = SDL2 SDL2_image SDL2_ttf SDL2_mixer
+LIBS = SDL2 SDL2_image SDL2_ttf SDL2_mixer lua
 # General compiler flags
 COMPILE_FLAGS = -std=c++14 -Wall -Wextra -g
 # Additional release-specific flags

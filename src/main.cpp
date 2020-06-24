@@ -4,6 +4,8 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
+#include <lua/lua.h>
+#include <glm/common.hpp>
 
 int main()
 {
