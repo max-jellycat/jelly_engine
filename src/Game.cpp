@@ -1,11 +1,9 @@
-#include <glm/glm.hpp>
 #include "Constants.h"
 #include "Logger.h"
 #include "Game.h"
-#include "Components/TransformComponent.h"
+#include "Components/Transform.h"
 
 Logger logger;
-
 EntityManager entityManager;
 SDL_Renderer *Game::renderer;
 
@@ -57,9 +55,9 @@ void Game::Init(int width, int height)
 void Game::LoadLevel(int levelNumber)
 {
     Entity &player(entityManager.AddEntity("Player"));
-    player.AddComponent<TransformComponent>(0, 0, 50, 50, 24, 24, 1, 1);
+    player.AddComponent<Transform>(0, 0, 50, 50, 24, 24, 1, 1);
     Entity &enemy(entityManager.AddEntity("Enemy"));
-    enemy.AddComponent<TransformComponent>(800, 0, -50, 50, 24, 24, 1, 1);
+    enemy.AddComponent<Transform>(800, 0, -50, 50, 24, 24, 1, 1);
 }
 
 void Game::HandleEvents()

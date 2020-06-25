@@ -29,7 +29,7 @@ void EntityManager::Render()
 Entity &EntityManager::AddEntity(std::string name)
 {
     Entity *entity = new Entity(*this, name);
-    this->entities.emplace_back(entity);
+    this->entities.push_back(entity);
 
     return *entity;
 }
