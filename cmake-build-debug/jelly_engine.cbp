@@ -45,9 +45,7 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/Users/max/dev/jelly_engine/lib"/>
-					<Add directory="/Library/Frameworks/SDL2.framework/Headers"/>
 					<Add directory="/usr/local/include/SDL2"/>
-					<Add directory="/Library/Frameworks/SDL2_image.framework/Headers"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
@@ -70,9 +68,7 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/Users/max/dev/jelly_engine/lib"/>
-					<Add directory="/Library/Frameworks/SDL2.framework/Headers"/>
 					<Add directory="/usr/local/include/SDL2"/>
-					<Add directory="/Library/Frameworks/SDL2_image.framework/Headers"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
