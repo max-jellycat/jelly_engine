@@ -11,11 +11,10 @@ Message( STATUS "CMAKE_FINDCMAKE: " ${CMAKE_SOURCE_DIR}/CMAKE )
 project(jelly_engine)
 
 # ------- Set Vars ------- #
-
-set(CMAKE_C++_STANDARD 14)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMAKE")
-set(SOURCE_FILES    src/Main.cpp src/Game.cpp src/Logger.cpp src/EntityManager.cpp src/Entity.cpp)
+set(SOURCE_FILES    src/Main.cpp src/Game.cpp src/Logger.cpp src/EntityManager.cpp src/Entity.cpp src/TextureManager.cpp src/TextureManager.h src/AssetManager.h src/AssetManager.cpp)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
@@ -23,7 +22,7 @@ Message("")
 
 # ------- End Set Vars --- #
 
-include_directories(lib)
+include_directories(/usr/local/Cellar/glm/0.9.9.8/include)
 
 # ------- Executable ----- #
 

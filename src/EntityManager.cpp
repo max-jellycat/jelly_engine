@@ -1,5 +1,7 @@
 #include "EntityManager.h"
 
+#include <utility>
+
 void EntityManager::ClearData()
 {
     for (auto &entity : this->entities)
@@ -8,7 +10,7 @@ void EntityManager::ClearData()
     }
 }
 
-bool EntityManager::HasNoEntities() const { return this->entities.size() == 0; }
+bool EntityManager::HasNoEntities() const { return this->entities.empty(); }
 
 void EntityManager::Update(float deltaTime)
 {
@@ -28,8 +30,8 @@ void EntityManager::Render()
 
 Entity &EntityManager::AddEntity(std::string name)
 {
-    Entity *entity = new Entity(*this, name);
-    this->entities.push_back(entity);
+    auto *entity = new Entity(*this, std::move(name));
+    this->entities.emplace_back(entity);
 
     return *entity;
 }

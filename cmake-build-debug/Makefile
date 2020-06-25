@@ -123,6 +123,33 @@ jelly_engine/fast:
 	$(MAKE) -f CMakeFiles/jelly_engine.dir/build.make CMakeFiles/jelly_engine.dir/build
 .PHONY : jelly_engine/fast
 
+src/AssetManager.o: src/AssetManager.cpp.o
+
+.PHONY : src/AssetManager.o
+
+# target to build an object file
+src/AssetManager.cpp.o:
+	$(MAKE) -f CMakeFiles/jelly_engine.dir/build.make CMakeFiles/jelly_engine.dir/src/AssetManager.cpp.o
+.PHONY : src/AssetManager.cpp.o
+
+src/AssetManager.i: src/AssetManager.cpp.i
+
+.PHONY : src/AssetManager.i
+
+# target to preprocess a source file
+src/AssetManager.cpp.i:
+	$(MAKE) -f CMakeFiles/jelly_engine.dir/build.make CMakeFiles/jelly_engine.dir/src/AssetManager.cpp.i
+.PHONY : src/AssetManager.cpp.i
+
+src/AssetManager.s: src/AssetManager.cpp.s
+
+.PHONY : src/AssetManager.s
+
+# target to generate assembly for a file
+src/AssetManager.cpp.s:
+	$(MAKE) -f CMakeFiles/jelly_engine.dir/build.make CMakeFiles/jelly_engine.dir/src/AssetManager.cpp.s
+.PHONY : src/AssetManager.cpp.s
+
 src/Entity.o: src/Entity.cpp.o
 
 .PHONY : src/Entity.o
@@ -258,6 +285,33 @@ src/Main.cpp.s:
 	$(MAKE) -f CMakeFiles/jelly_engine.dir/build.make CMakeFiles/jelly_engine.dir/src/Main.cpp.s
 .PHONY : src/Main.cpp.s
 
+src/TextureManager.o: src/TextureManager.cpp.o
+
+.PHONY : src/TextureManager.o
+
+# target to build an object file
+src/TextureManager.cpp.o:
+	$(MAKE) -f CMakeFiles/jelly_engine.dir/build.make CMakeFiles/jelly_engine.dir/src/TextureManager.cpp.o
+.PHONY : src/TextureManager.cpp.o
+
+src/TextureManager.i: src/TextureManager.cpp.i
+
+.PHONY : src/TextureManager.i
+
+# target to preprocess a source file
+src/TextureManager.cpp.i:
+	$(MAKE) -f CMakeFiles/jelly_engine.dir/build.make CMakeFiles/jelly_engine.dir/src/TextureManager.cpp.i
+.PHONY : src/TextureManager.cpp.i
+
+src/TextureManager.s: src/TextureManager.cpp.s
+
+.PHONY : src/TextureManager.s
+
+# target to generate assembly for a file
+src/TextureManager.cpp.s:
+	$(MAKE) -f CMakeFiles/jelly_engine.dir/build.make CMakeFiles/jelly_engine.dir/src/TextureManager.cpp.s
+.PHONY : src/TextureManager.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -267,6 +321,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... jelly_engine"
+	@echo "... src/AssetManager.o"
+	@echo "... src/AssetManager.i"
+	@echo "... src/AssetManager.s"
 	@echo "... src/Entity.o"
 	@echo "... src/Entity.i"
 	@echo "... src/Entity.s"
@@ -282,6 +339,9 @@ help:
 	@echo "... src/Main.o"
 	@echo "... src/Main.i"
 	@echo "... src/Main.s"
+	@echo "... src/TextureManager.o"
+	@echo "... src/TextureManager.i"
+	@echo "... src/TextureManager.s"
 .PHONY : help
 
 
