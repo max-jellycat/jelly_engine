@@ -30,7 +30,7 @@ public:
     {
         T *newComponent = new T(std::forward<TArgs>(args)...);
         newComponent->owner = this;
-        this->entities.emplace_back(newComponent);
+        this->components.emplace_back(newComponent);
         newComponent->Init();
 
         return *newComponent;

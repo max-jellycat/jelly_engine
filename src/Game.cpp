@@ -2,10 +2,11 @@
 #include "Constants.h"
 #include "Logger.h"
 #include "Game.h"
+#include "Components/TransformComponent.h"
 
 Logger logger;
 
-EntityManager manager;
+EntityManager entityManager;
 SDL_Renderer *Game::renderer;
 
 Game::Game()
@@ -47,8 +48,18 @@ void Game::Init(int width, int height)
     logger.SetLevel(Logger::LevelTrace);
     logger.Trace("SDL renderer created!...");
 
+    this->LoadLevel(0);
+
     this->running = true;
     logger.Trace("Game is running...");
+}
+
+void Game::LoadLevel(int levelNumber)
+{
+    Entity &player(entityManager.AddEntity("Player"));
+    player.AddComponent<TransformComponent>(0, 0, 50, 50, 24, 24, 1, 1);
+    Entity &enemy(entityManager.AddEntity("Enemy"));
+    enemy.AddComponent<TransformComponent>(800, 0, -50, 50, 24, 24, 1, 1);
 }
 
 void Game::HandleEvents()
@@ -86,7 +97,7 @@ void Game::Update()
     // Set the new ticks for the current frame to be used in the next pass
     this->ticksLastFrame = SDL_GetTicks();
 
-    // TODO: Entity Manager Update
+    entityManager.Update(deltaTime);
 }
 
 void Game::Render()
@@ -94,7 +105,10 @@ void Game::Render()
     SDL_SetRenderDrawColor(this->renderer, 35, 35, 35, 255);
     SDL_RenderClear(this->renderer);
 
-    // TODO: Entity Manager Render
+    if (entityManager.HasNoEntities())
+        return;
+
+    entityManager.Render();
 
     SDL_RenderPresent(this->renderer);
 }
