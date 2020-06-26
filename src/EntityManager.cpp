@@ -2,34 +2,27 @@
 
 #include <utility>
 
-void EntityManager::ClearData()
-{
-    for (auto &entity : this->entities)
-    {
+void EntityManager::ClearData() {
+    for (auto &entity : this->entities) {
         entity->Destroy();
     }
 }
 
 bool EntityManager::HasNoEntities() const { return this->entities.empty(); }
 
-void EntityManager::Update(float deltaTime)
-{
-    for (auto &entity : this->entities)
-    {
+void EntityManager::Update(float deltaTime) {
+    for (auto &entity : this->entities) {
         entity->Update(deltaTime);
     }
 }
 
-void EntityManager::Render()
-{
-    for (auto &entity : this->entities)
-    {
+void EntityManager::Render() {
+    for (auto &entity : this->entities) {
         entity->Render();
     }
 }
 
-Entity &EntityManager::AddEntity(std::string name)
-{
+Entity &EntityManager::AddEntity(std::string name) {
     auto *entity = new Entity(*this, std::move(name));
     this->entities.emplace_back(entity);
 

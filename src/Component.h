@@ -4,13 +4,15 @@
 
 class Entity;
 
-class Component
-{
+class Component {
 public:
     Entity *owner;
 
-    virtual ~Component(){};
-    virtual void Init(){};
-    virtual void Update(float deltaTime){};
-    virtual void Render(){};
+    virtual ~Component() {};
+
+    virtual void Init() {};
+
+    virtual void Update(float deltaTime) {};
+
+    virtual void Render() {};
 };

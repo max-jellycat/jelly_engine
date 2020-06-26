@@ -6,23 +6,35 @@
 #include "EntityManager.h"
 #include "Entity.h"
 #include "Component.h"
+#include "AssetManager.h"
 
-class Game
-{
+class AssetManager;
+
+class Game {
 private:
     bool running;
-    int ticksLastFrame;
-    SDL_Window *window;
+    int ticksLastFrame{};
+    SDL_Window *window{};
 
 public:
     static SDL_Renderer *renderer;
+    static AssetManager *assetManager;
+
     Game();
+
     ~Game();
+
     bool Running() const;
+
     void Init(int width, int height);
-    void LoadLevel(int levelNumber);
+
+    static void LoadLevel(int levelNumber);
+
     void HandleEvents();
+
     void Update();
-    void Render();
+
+    void Render() const;
+
     void Clean();
 };

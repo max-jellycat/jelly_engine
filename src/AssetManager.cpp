@@ -10,7 +10,7 @@ void AssetManager::AddTexture(std::string textureId, const char *filePath) {
     this->textures.emplace(textureId, TextureManager::LoadTexture(filePath));
 }
 
-SDL_Texture * AssetManager::GetTexture(const std::string& textureId) {
+SDL_Texture *AssetManager::GetTexture(const std::string &textureId) {
     return this->textures[textureId];
 }
 
