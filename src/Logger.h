@@ -9,7 +9,7 @@ public:
     };
 
 private:
-    Level logLevel;
+    Level m_logLevel;
 
 public:
     Logger();

@@ -12,10 +12,10 @@ class EntityManager;
 
 class Entity {
 private:
-    EntityManager &manager;
-    bool active;
-    std::vector<Component *> components;
-    std::map<const std::type_info *, Component *> componentTypeMap;
+    EntityManager &m_manager;
+    bool m_isActive;
+    std::vector<Component *> m_components;
+    std::map<const std::type_info *, Component *> m_componentTypeMap;
 
 public:
     std::string name;
@@ -32,14 +32,14 @@ public:
 
     void ListComponents() const;
 
-    bool Active() const;
+    bool IsActive() const;
 
     template<typename T, typename... TArgs>
     T &AddComponent(TArgs &&... args) {
         T *newComponent = new T(std::forward<TArgs>(args)...);
         newComponent->owner = this;
-        this->components.emplace_back(newComponent);
-        this->componentTypeMap[&typeid(*newComponent)] = newComponent;
+        m_components.emplace_back(newComponent);
+        m_componentTypeMap[&typeid(*newComponent)] = newComponent;
         newComponent->Init();
 
         return *newComponent;
@@ -47,6 +47,6 @@ public:
 
     template<typename T>
     T *GetComponent() {
-        return static_cast<T *>(componentTypeMap[&typeid(T)]);
+        return static_cast<T *>(m_componentTypeMap[&typeid(T)]);
     }
 };

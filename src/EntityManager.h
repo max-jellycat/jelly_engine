@@ -6,7 +6,7 @@
 
 class EntityManager {
 private:
-    std::vector<Entity *> entities;
+    std::vector<Entity *> m_entities;
 
 public:
     void ClearData();

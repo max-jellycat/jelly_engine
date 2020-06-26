@@ -11,11 +11,11 @@ AssetManager *Game::assetManager = new AssetManager(&entityManager);
 SDL_Renderer *Game::renderer;
 
 Game::Game()
-        : running(false) {}
+        : m_isRunning(false) {}
 
 Game::~Game() = default;
 
-bool Game::Running() const { return this->running; }
+bool Game::IsRunning() const { return this->m_isRunning; }
 
 void Game::Init(int width, int height) {
 
@@ -27,17 +27,17 @@ void Game::Init(int width, int height) {
     logger.SetLevel(Logger::LevelTrace);
     logger.Trace("SDL subsystems initialized!...");
 
-    this->window = SDL_CreateWindow(nullptr, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
-                                    SDL_WINDOW_BORDERLESS);
-    if (!this->window) {
+    m_window = SDL_CreateWindow(nullptr, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
+                                      SDL_WINDOW_BORDERLESS);
+    if (!m_window) {
         logger.SetLevel(Logger::LevelError);
-        logger.Error("Error creating SDL window!");
+        logger.Error("Error creating SDL m_window!");
         return;
     }
     logger.SetLevel(Logger::LevelTrace);
-    logger.Trace("SDL window created!...");
+    logger.Trace("SDL m_window created!...");
 
-    Game::renderer = SDL_CreateRenderer(this->window, -1, 0);
+    Game::renderer = SDL_CreateRenderer(m_window, -1, 0);
     if (!Game::renderer) {
         logger.SetLevel(Logger::LevelError);
         logger.Error("Error creating SDL renderer!");
@@ -46,22 +46,26 @@ void Game::Init(int width, int height) {
     logger.SetLevel(Logger::LevelTrace);
     logger.Trace("SDL renderer created!...");
 
-    this->LoadLevel(0);
+    LoadLevel(0);
 
-    this->running = true;
-    logger.Trace("Game is running...");
+    m_isRunning = true;
+    logger.Trace("Game is m_isRunning...");
 }
 
 void Game::LoadLevel(int levelNumber) {
-    // Start including new assets to the asset manager
-    std::string textureFilePath = "/Users/max/dev/jelly_engine/assets/images/sprites/tank-big-right.png";
-    assetManager->AddTexture("Tank", textureFilePath.c_str());
+    // Start including new assets to the asset m_manager
+    assetManager->AddTexture("Tank", "/Users/max/dev/jelly_engine/assets/images/sprites/tank-big-right.png");
+    assetManager->AddTexture("Chopper", "/Users/max/dev/jelly_engine/assets/images/sprites/chopper-spritesheet.png");
 
-    // Start including entities to entity manager
-    // And add components to them
-    Entity &player(entityManager.AddEntity("Tank"));
-    player.AddComponent<Transform>(0, 0, 50, 50, 32, 32, 1);
-    player.AddComponent<Sprite>("Tank");
+    // Start including m_entities to entity m_manager
+    // And add m_components to them
+    Entity &player(entityManager.AddEntity("Player"));
+    player.AddComponent<Transform>(0, 0, 0, 0, 32, 32, 1);
+    player.AddComponent<Sprite>("Chopper", 2, 90, true, false);
+
+    Entity &tank(entityManager.AddEntity("Tank"));
+    tank.AddComponent<Transform>(30, 30, 0, 0, 32, 32, 1);
+    tank.AddComponent<Sprite>("Tank");
 
     entityManager.ListEntities();
 }
@@ -72,11 +76,11 @@ void Game::HandleEvents() {
 
     switch (event.type) {
         case SDL_QUIT:
-            this->running = false;
+            m_isRunning = false;
             break;
         case SDL_KEYDOWN:
             if (event.key.keysym.sym == SDLK_ESCAPE)
-                this->running = false;
+                m_isRunning = false;
             break;
         default:
             break;
@@ -85,24 +89,24 @@ void Game::HandleEvents() {
 
 void Game::Update() {
     // Wait until frame target time has ellapsed
-    unsigned int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - this->ticksLastFrame);
+    unsigned int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - m_ticksLastFrame);
     if (timeToWait > 0 && timeToWait < FRAME_TARGET_TIME)
         SDL_Delay(timeToWait);
 
     // Delta time is the difference in ticks form last frame converted to seconds
-    float deltaTime = (float)(SDL_GetTicks() - this->ticksLastFrame) / 1000.0f;
+    float deltaTime = (float)(SDL_GetTicks() - m_ticksLastFrame) / 1000.0f;
 
     // Clamp deltaTime to a maximum value
     deltaTime = (deltaTime > 0.05f) ? 0.05f : deltaTime;
 
     // Set the new ticks for the current frame to be used in the next pass
-    this->ticksLastFrame = SDL_GetTicks();
+    m_ticksLastFrame = SDL_GetTicks();
 
     entityManager.Update(deltaTime);
 }
 
 void Game::Render() const {
-    SDL_SetRenderDrawColor(Game::renderer, 35, 35, 35, 255);
+    SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
     SDL_RenderClear(Game::renderer);
 
     if (entityManager.HasNoEntities())
@@ -115,6 +119,6 @@ void Game::Render() const {
 
 void Game::Clean() {
     SDL_DestroyRenderer(Game::renderer);
-    SDL_DestroyWindow(this->window);
+    SDL_DestroyWindow(m_window);
     SDL_Quit();
 }

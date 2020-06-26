@@ -2,23 +2,23 @@
 #include "Logger.h"
 
 Logger::Logger()
-        : logLevel(LevelTrace) {}
+        : m_logLevel(LevelTrace) {}
 
 void Logger::SetLevel(Level level) {
-    this->logLevel = level;
+    m_logLevel = level;
 }
 
 void Logger::Error(const char *message) const {
-    if (this->logLevel == LevelError)
+    if (m_logLevel == LevelError)
         std::cerr << "[ERROR]: " << message << std::endl;
 }
 
 void Logger::Warn(const char *message) const {
-    if (this->logLevel == LevelWarn)
+    if (m_logLevel == LevelWarn)
         std::cout << "[WARNING]: " << message << std::endl;
 }
 
 void Logger::Trace(const char *message) const {
-    if (this->logLevel == LevelTrace)
+    if (m_logLevel == LevelTrace)
         std::cout << "[TRACE]: " << message << std::endl;
 }

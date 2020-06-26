@@ -84,6 +84,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/max/dev/jelly_engine/src/Animation.cpp">
+			<Option target="jelly_engine"/>
+		</Unit>
+		<Unit filename="/Users/max/dev/jelly_engine/src/Animation.h">
+			<Option target="jelly_engine"/>
+		</Unit>
 		<Unit filename="/Users/max/dev/jelly_engine/src/AssetManager.cpp">
 			<Option target="jelly_engine"/>
 		</Unit>

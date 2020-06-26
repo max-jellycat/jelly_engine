@@ -1,36 +1,37 @@
 #include <iostream>
+#include <utility>
 #include "Entity.h"
 
 Entity::Entity(EntityManager &manager)
-        : manager(manager) {
-    this->active = true;
+        : m_manager(manager) {
+    m_isActive = true;
 }
 
 Entity::Entity(EntityManager &manager, std::string name)
-        : manager(manager), name(name) {
-    this->active = true;
+        : m_manager(manager), name(std::move(name)) {
+    m_isActive = true;
 }
 
 void Entity::Update(float deltaTime) {
-    for (auto &component : this->components) {
+    for (auto &component : m_components) {
         component->Update(deltaTime);
     }
 }
 
 void Entity::Render() {
-    for (auto &component : this->components) {
+    for (auto &component : m_components) {
         component->Render();
     }
 }
 
 void Entity::Destroy() {
-    this->active = false;
+    m_isActive = false;
 }
 
 void Entity::ListComponents() const {
-    for (auto &component: this->componentTypeMap) {
+    for (auto &component: m_componentTypeMap) {
         std::cout << "  Component<" << component.first->name() << ">" << std::endl;
     }
 }
 
-bool Entity::Active() const { return this->active; }
+bool Entity::IsActive() const { return m_isActive; }

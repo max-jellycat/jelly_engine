@@ -6,9 +6,9 @@ class Entity;
 
 class Component {
 public:
-    Entity *owner;
+    Entity *owner{};
 
-    virtual ~Component() {};
+    virtual ~Component() = default;;
 
     virtual void Init() {};
 

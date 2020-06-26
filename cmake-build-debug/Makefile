@@ -123,6 +123,33 @@ jelly_engine/fast:
 	$(MAKE) -f CMakeFiles/jelly_engine.dir/build.make CMakeFiles/jelly_engine.dir/build
 .PHONY : jelly_engine/fast
 
+src/Animation.o: src/Animation.cpp.o
+
+.PHONY : src/Animation.o
+
+# target to build an object file
+src/Animation.cpp.o:
+	$(MAKE) -f CMakeFiles/jelly_engine.dir/build.make CMakeFiles/jelly_engine.dir/src/Animation.cpp.o
+.PHONY : src/Animation.cpp.o
+
+src/Animation.i: src/Animation.cpp.i
+
+.PHONY : src/Animation.i
+
+# target to preprocess a source file
+src/Animation.cpp.i:
+	$(MAKE) -f CMakeFiles/jelly_engine.dir/build.make CMakeFiles/jelly_engine.dir/src/Animation.cpp.i
+.PHONY : src/Animation.cpp.i
+
+src/Animation.s: src/Animation.cpp.s
+
+.PHONY : src/Animation.s
+
+# target to generate assembly for a file
+src/Animation.cpp.s:
+	$(MAKE) -f CMakeFiles/jelly_engine.dir/build.make CMakeFiles/jelly_engine.dir/src/Animation.cpp.s
+.PHONY : src/Animation.cpp.s
+
 src/AssetManager.o: src/AssetManager.cpp.o
 
 .PHONY : src/AssetManager.o
@@ -321,6 +348,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... jelly_engine"
+	@echo "... src/Animation.o"
+	@echo "... src/Animation.i"
+	@echo "... src/Animation.s"
 	@echo "... src/AssetManager.o"
 	@echo "... src/AssetManager.i"
 	@echo "... src/AssetManager.s"

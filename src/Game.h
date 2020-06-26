@@ -12,9 +12,9 @@ class AssetManager;
 
 class Game {
 private:
-    bool running;
-    int ticksLastFrame{};
-    SDL_Window *window{};
+    bool m_isRunning;
+    int m_ticksLastFrame{};
+    SDL_Window *m_window{};
 
 public:
     static SDL_Renderer *renderer;
@@ -24,7 +24,7 @@ public:
 
     ~Game();
 
-    bool Running() const;
+    bool IsRunning() const;
 
     void Init(int width, int height);
 
