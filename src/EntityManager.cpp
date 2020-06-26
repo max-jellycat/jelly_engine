@@ -9,10 +9,12 @@ void EntityManager::ClearData() {
     }
 }
 
-void EntityManager::PrintEntities() const {
+void EntityManager::ListEntities() const {
+    unsigned int i = 0;
     for(auto& entity: this->entities) {
-        std::cout << "Entity: " << entity->name << std::endl;
-        entity->PrintComponents();
+        std::cout << "Entity[" << i << "]: " << entity->name << std::endl;
+        entity->ListComponents();
+        i++;
     }
 }
 

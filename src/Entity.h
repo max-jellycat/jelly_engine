@@ -30,7 +30,7 @@ public:
 
     void Destroy();
 
-    void PrintComponents() const;
+    void ListComponents() const;
 
     bool Active() const;
 

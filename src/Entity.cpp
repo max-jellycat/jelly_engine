@@ -27,10 +27,9 @@ void Entity::Destroy() {
     this->active = false;
 }
 
-void Entity::PrintComponents() const {
-    std::cout << "Components: ";
+void Entity::ListComponents() const {
     for (auto &component: this->componentTypeMap) {
-        std::cout << "<" << component.first->name() << "> ";
+        std::cout << "  Component<" << component.first->name() << ">" << std::endl;
     }
 }
 

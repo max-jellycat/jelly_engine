@@ -62,6 +62,8 @@ void Game::LoadLevel(int levelNumber) {
     Entity &player(entityManager.AddEntity("Tank"));
     player.AddComponent<Transform>(0, 0, 50, 50, 32, 32, 1);
     player.AddComponent<Sprite>("Tank");
+
+    entityManager.ListEntities();
 }
 
 void Game::HandleEvents() {
