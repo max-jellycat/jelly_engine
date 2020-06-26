@@ -28,7 +28,7 @@ void Game::Init(int width, int height) {
     logger.Trace("SDL subsystems initialized!...");
 
     m_window = SDL_CreateWindow(nullptr, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
-                                      SDL_WINDOW_BORDERLESS);
+                                SDL_WINDOW_BORDERLESS);
     if (!m_window) {
         logger.SetLevel(Logger::LevelError);
         logger.Error("Error creating SDL m_window!");
@@ -49,23 +49,43 @@ void Game::Init(int width, int height) {
     LoadLevel(0);
 
     m_isRunning = true;
-    logger.Trace("Game is m_isRunning...");
+    logger.Trace("Game is running...");
 }
 
 void Game::LoadLevel(int levelNumber) {
     // Start including new assets to the asset m_manager
     assetManager->AddTexture("Tank", "/Users/max/dev/jelly_engine/assets/images/sprites/tank-big-right.png");
     assetManager->AddTexture("Chopper", "/Users/max/dev/jelly_engine/assets/images/sprites/chopper-spritesheet.png");
+    assetManager->AddTexture("Radar", "/Users/max/dev/jelly_engine/assets/images/sprites/radar.png");
 
     // Start including m_entities to entity m_manager
     // And add m_components to them
     Entity &player(entityManager.AddEntity("Player"));
     player.AddComponent<Transform>(0, 0, 0, 0, 32, 32, 1);
-    player.AddComponent<Sprite>("Chopper", 2, 90, true, false);
+    player.AddComponent<Sprite>("Chopper", true, false);
+    auto &playerAnimator = player.AddComponent<Animator>();
+
+    Animation downAnimation(0, 2, 90);
+    Animation rightAnimation(1, 2, 90);
+    Animation leftAnimation(2, 2, 90);
+    Animation upAnimation(3, 2, 90);
+
+    playerAnimator.AddAnimation("DownAnimation", downAnimation);
+    playerAnimator.AddAnimation("RightAnimation", rightAnimation);
+    playerAnimator.AddAnimation("LeftAnimation", leftAnimation);
+    playerAnimator.AddAnimation("UpAnimation", upAnimation);
+
+    playerAnimator.Play("DownAnimation");
 
     Entity &tank(entityManager.AddEntity("Tank"));
     tank.AddComponent<Transform>(30, 30, 0, 0, 32, 32, 1);
     tank.AddComponent<Sprite>("Tank");
+
+    Entity &radar(entityManager.AddEntity("Radar"));
+    radar.AddComponent<Transform>(720, 15, 0, 0, 64, 64, 1);
+    radar.AddComponent<Sprite>("Radar", true, true);
+    Animation radarSeek(0, 8, 150);
+    radar.AddComponent<Animator>("RadarSeek", radarSeek);
 
     entityManager.ListEntities();
 }
@@ -94,7 +114,7 @@ void Game::Update() {
         SDL_Delay(timeToWait);
 
     // Delta time is the difference in ticks form last frame converted to seconds
-    float deltaTime = (float)(SDL_GetTicks() - m_ticksLastFrame) / 1000.0f;
+    float deltaTime = (float) (SDL_GetTicks() - m_ticksLastFrame) / 1000.0f;
 
     // Clamp deltaTime to a maximum value
     deltaTime = (deltaTime > 0.05f) ? 0.05f : deltaTime;

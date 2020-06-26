@@ -5,7 +5,7 @@ int main() {
     Game *game = new Game();
     game->Init(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    while (game->Running()) {
+    while (game->IsRunning()) {
         game->HandleEvents();
         game->Update();
         game->Render();
