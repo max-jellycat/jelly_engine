@@ -30,6 +30,8 @@ public:
 
     void Destroy();
 
+    void PrintComponents() const;
+
     bool Active() const;
 
     template<typename T, typename... TArgs>

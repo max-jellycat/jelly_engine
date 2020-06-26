@@ -1,10 +1,18 @@
 #include "EntityManager.h"
 
 #include <utility>
+#include <iostream>
 
 void EntityManager::ClearData() {
     for (auto &entity : this->entities) {
         entity->Destroy();
+    }
+}
+
+void EntityManager::PrintEntities() const {
+    for(auto& entity: this->entities) {
+        std::cout << "Entity: " << entity->name << std::endl;
+        entity->PrintComponents();
     }
 }
 

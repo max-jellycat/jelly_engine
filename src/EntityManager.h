@@ -19,6 +19,8 @@ public:
 
     std::vector<Entity *> GetEntities() const;
 
+    void PrintEntities() const;
+
     bool HasNoEntities() const;
 
     unsigned int GetEntityCount() const;
